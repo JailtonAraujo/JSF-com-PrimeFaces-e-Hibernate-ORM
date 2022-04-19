@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+	</h:head>
+	
+	<h:form>
+		<h:messages/>
+		
+		<h:panelGrid columns="2">
+		<p:outputLabel value="ID:"/>		
+		<p:inputText value="#{pessoaBean.pessoa.id}" label="ID:" readonly="true" />
+		
+		<p:outputLabel value="Nome:"/>
+		<p:inputText value="#{pessoaBean.pessoa.nome}" label="Nome:" rendered="true" requiredMessage="Nome é Obrigatorio!"/>
+		
+		<p:outputLabel value="Sobrenome:"/>
+		<p:inputText value="#{pessoaBean.pessoa.sobrenome}" label="Sobrenome" required="true" requiredMessage="Sobrenome é Obrigatorio!"/>
+		
+		
+		<h:commandButton value="SALVAR" action="#{pessoaBean.salvar}"/>
+		</h:panelGrid>
+	</h:form>
+
+</html>
