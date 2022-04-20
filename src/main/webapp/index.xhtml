@@ -6,24 +6,25 @@
       xmlns:p="http://primefaces.org/ui">
 	
 	<h:head>
+		<link rel="stylesheet" type="text/css" href="resources/css/indexStyle.css"/>
 	</h:head>
 	
+	<h:body>
 	<h:form>
 		<h:messages/>
+		<p:panel id="basic" header="LOGIN" style="margin-bottom:20px; width:600px;" styleClass="panelMain">
+        	<h:panelGrid columns="1" styleClass="panelG">
+        	<p:outputLabel value="LOGIN:" for="txtLogin"/>
+        	<p:inputText id="txtLogin" styleClass="inputs"/>
+        	
+        	<p:outputLabel value="SENHA:" for="txtSenha"/>
+        	<p:password id="txtSenha" label="Senha:" styleClass="inputs"/>
+   			</h:panelGrid>
+   			<p:commandButton value="LOGAR" />
+   			<p:commandButton value="CADASTRE-SE" styleClass="btnCad"/>
+    	
+		</p:panel>
 		
-		<h:panelGrid columns="2">
-		<p:outputLabel value="ID:"/>		
-		<p:inputText value="#{pessoaBean.pessoa.id}" label="ID:" readonly="true" />
-		
-		<p:outputLabel value="Nome:"/>
-		<p:inputText value="#{pessoaBean.pessoa.nome}" label="Nome:" rendered="true" requiredMessage="Nome é Obrigatorio!"/>
-		
-		<p:outputLabel value="Sobrenome:"/>
-		<p:inputText value="#{pessoaBean.pessoa.sobrenome}" label="Sobrenome" required="true" requiredMessage="Sobrenome é Obrigatorio!"/>
-		
-		
-		<h:commandButton value="SALVAR" action="#{pessoaBean.salvar}"/>
-		</h:panelGrid>
 	</h:form>
-
+</h:body>
 </html>
