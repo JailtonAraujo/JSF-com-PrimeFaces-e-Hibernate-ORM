@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,19 +11,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pessoa")
-public class Pessoa {
+public class Pessoa implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
+
 	private String nome;
 
 	private String sobrenome;
 
+	private String login;
+
+	private String senha;
+
 	public Pessoa() {
 	}
+	
+
+	public Pessoa(Long id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -46,6 +61,22 @@ public class Pessoa {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override

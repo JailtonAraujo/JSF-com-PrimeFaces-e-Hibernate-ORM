@@ -21,4 +21,5 @@ public class DAOGeneric <E>{
 		
 		return object;
 	}
+	
 }

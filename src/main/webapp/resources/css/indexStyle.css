@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
 body {
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: #483D8B;
+	
+}
+
+.panelMain{
+	margin-top: 20px;
 }
 
 .panelG{
@@ -19,7 +24,13 @@ body {
 .ui-button{
 	width: 100px;
 	margin-top: 20px;
+	
 }
+
+.ui-button-text{
+	font-size: 12pt;
+}
+
 .ui-panel-titlebar	{
 	text-align: center;
 	background-color: darkcyan;
@@ -30,5 +41,5 @@ body {
 .btnCad{
 	width: 170px;
 	font-size: 12pt;
-	margin-left: 291px;
+	margin-left: 284px;
 }
