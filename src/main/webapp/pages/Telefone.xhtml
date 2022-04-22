@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h:head>
+		<link rel="stylesheet" type="text/css" href="../resources/css/principalStyle.css"/>
+	</h:head>
+	
+	<h:body >
+	
+	<ui:include src="/pages/menubar.xhtml"/>
+	
+	 <p:messages id="messages"  closable="true">
+        <p:autoUpdate />
+    </p:messages>
+	
+	<h:form styleClass="container" id="formCad">
+	
+	 <p:panel id="toggleable" header="CADASTRO DE USUARIO" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px" styleClass="panel-main">
+        <h:panelGrid columns="2" style="width:100%;" columnClasses="colunm"> 
+        <p:outputLabel value="ID:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" styleClass="inputs" id="id"/>
+        
+        <p:outputLabel value="Nome:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.nome}" styleClass="inputs" id="nome"/>
+        
+        <p:outputLabel value="Sobrenome:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.sobrenome}" styleClass="inputs" id="sobrenome"/>
+        
+        <p:outputLabel value="Login:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.login}" styleClass="inputs" id="login"/>
+        
+        <p:outputLabel value="Senha:" styleClass="labels"/>
+        <p:password value="#{pessoaBean.pessoa.senha}" styleClass="inputs" id="senha"/>
+        
+     
+        <p:commandButton value="Salvar" >
+        	<f:ajax event="click" render="toggleable" listener="#{pessoaBean.salvar}"/>
+        </p:commandButton>
+    	<p:commandButton value="Limpar">
+    		<f:ajax event="click" listener="#{pessoaBean.limpar}" render="id nome sobrenome login senha" execute="@this" immediate="true"/>
+    	</p:commandButton>
+    	<p:commandButton value="Telefones" >
+    		<f:ajax event="click" listener="#{pessoaBean.limpar}" render="id nome sobrenome login senha" execute="@this" immediate="true"/>
+    	</p:commandButton>
+    	
+    	  
+        </h:panelGrid>
+        </p:panel>
+ 
+	</h:form>
+	
+	 <h:form id="formTable">
+	  <p:commandButton value="Buscar">
+    	  	<f:ajax event="click" listener="#{pessoaBean.carregarListPerson}" render="@form" execute="nameSearch"/>
+    	  </p:commandButton>
+    	  <p:inputText value="#{pessoaBean.pessoa.nome}" id="nameSearch"/>
+		<p:dataTable value="#{pessoaBean.usuarios}" var="pers" id="tblUsers" >
+			 <p:column headerText="Id">
+       			 <h:outputText value="#{pers.id}" />
+    		 </p:column>
+    		 <p:column headerText="Nome">
+       			 <h:outputText value="#{pers.nome}" />
+    		 </p:column>
+    		 <p:column headerText="Sobrenome">
+       			 <h:outputText value="#{pers.sobrenome}" />
+    		 </p:column>
+    		 <p:column headerText="Login">
+       			 <h:outputText value="#{pers.login}" />
+    		 </p:column>
+    		 <p:column headerText="Excluir">
+       			 <p:commandButton value="EXCLUIR" >
+       			 	<f:setPropertyActionListener value="#{pers.id}" target="#{pessoaBean.pessoa.id}"/>
+       			 	<f:ajax event="click" listener="#{pessoaBean.deletar}" render="@form" immediate="true"/>
+       			 </p:commandButton>
+       			
+    		 </p:column>
+    		 <p:column headerText="Editar">
+       			 <p:commandButton value="EDITAR" id="btnedit">
+       			 	<f:setPropertyActionListener value="#{pers}" target="#{pessoaBean.pessoa}"/>
+       			 	<f:ajax event="click" execute="btnedit" render="formCad"/>
+       			 </p:commandButton>
+    		 </p:column>
+		</p:dataTable>
+	
+	</h:form>
+
+</h:body>
+</html>

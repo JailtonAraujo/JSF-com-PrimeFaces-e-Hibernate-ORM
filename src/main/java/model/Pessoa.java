@@ -1,12 +1,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +29,9 @@ public class Pessoa implements Serializable {
 	private String login;
 
 	private String senha;
+
+	@OneToMany(mappedBy = "pessoa", cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.REFRESH})
+	private List<Telefone> telefones;
 
 	public Pessoa() {
 	}
@@ -76,6 +82,14 @@ public class Pessoa implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
 	}
 
 	@Override

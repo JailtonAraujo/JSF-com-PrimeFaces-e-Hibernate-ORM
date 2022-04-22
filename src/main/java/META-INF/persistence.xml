@@ -4,6 +4,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		<class>model.Pessoa</class>
+		<class>model.Telefone</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
