@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.container{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.panel-main{
+	width: 1000px;
+}
+
+.ui-panel-titlebar{
+	text-align: center;
+}	
+
+.inputs{
+	width: 100%;
+}
+
+
+.colunm{
+	width: 80px;
+}
+

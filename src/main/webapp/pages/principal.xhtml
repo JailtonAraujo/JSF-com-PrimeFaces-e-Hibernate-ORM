@@ -7,17 +7,46 @@
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<h:head>
-		<link rel="stylesheet" type="text/css" href=""/>
+		<link rel="stylesheet" type="text/css" href="../resources/css/principalStyle.css"/>
 	</h:head>
 	
-	<h:body>
+	<h:body >
 	
-	<ui:include src="/menubar.xhtml"/>
+	<ui:include src="/pages/menubar.xhtml"/>
 	
-	<h:form>
-		<h:messages/>
+	<p:messages autoUpdate="true"/>
 	
-		
+	<h:form styleClass="container">
+	
+	 <p:panel id="toggleable" header="CADASTRO DE USUARIO" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px" styleClass="panel-main">
+        <h:panelGrid columns="2" style="width:100%;" columnClasses="colunm"> 
+        <p:outputLabel value="ID:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" styleClass="inputs"/>
+        
+        <p:outputLabel value="Nome:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.nome}" styleClass="inputs"/>
+        
+        <p:outputLabel value="Sobrenome:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.sobrenome}" styleClass="inputs"/>
+        
+        <p:outputLabel value="Login:" styleClass="labels"/>
+        <p:inputText value="#{pessoaBean.pessoa.login}" styleClass="inputs"/>
+        
+        <p:outputLabel value="Senha:" styleClass="labels"/>
+        <p:password value="#{pessoaBean.pessoa.senha}" styleClass="inputs"/>
+        
+     
+        <p:commandButton value="Salvar" >
+        	<f:ajax event="click" render="toggleable" listener="#{pessoaBean.salvar}"/>
+        </p:commandButton>
+        <p:commandButton value="Buscar"/>
+    	<p:commandButton value="Limpar"/>
+        
+        </h:panelGrid>
+        </p:panel>
+     
+      
+        
 	</h:form>
 </h:body>
 </html>

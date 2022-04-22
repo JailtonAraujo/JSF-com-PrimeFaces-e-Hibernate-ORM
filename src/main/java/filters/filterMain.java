@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,8 +20,8 @@ import jpautil.JPAUtil;
 import model.Pessoa;
 
 
-@WebFilter("/*")
-public class filterMain extends HttpFilter implements Filter {
+@WebFilter("/pages/*")
+public class filterMain implements Filter {
        
     public filterMain() {}
     
@@ -42,8 +43,10 @@ public class filterMain extends HttpFilter implements Filter {
 			
 		}
 		
-		else if((!url.equalsIgnoreCase("/index.jsf") && usuarioLogado == null) || usuarioLogado.getId() < 1 || usuarioLogado.getNome().trim().isEmpty()) {
-			request.getRequestDispatcher("index.jsf").forward(req, response);
+		else if((!url.equalsIgnoreCase("/index.jsf?faces-redirect=true") && usuarioLogado == null)) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsf?faces-redirect=true");
+			dispatcher.forward(request, response);
 			return;
 		}
 		

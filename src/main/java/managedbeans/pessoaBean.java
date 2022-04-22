@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import javax.servlet.http.HttpServletRequest;
 
 import dao.DAOGeneric;
@@ -44,11 +45,11 @@ public class pessoaBean implements Serializable{
 			ExternalContext externalContext = context.getExternalContext();
 			externalContext.getSessionMap().put("usuarioLogado", usuarioLogado);
 			
-			return "principal.jsf";
+			return "pages/principal.jsf?faces-redirect=true";
 		}
 		
 		GerarMSG("Usuario ou Senha Incorretos!");
-		return "index.jsf";
+		return "index.jsf?faces-redirect=true";
 	}
 	
 	public String logout() {
@@ -60,12 +61,12 @@ public class pessoaBean implements Serializable{
 				.getRequest();
 		request.getSession().invalidate();
 
-		return "index.jsf";
+		return "/index.jsf?faces-redirect=true";
 	}
 	
 	
 	public void GerarMSG(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage("fdsfsdfsdf"));
+		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(msg));
 	}
 	
 	public void setPessoa(Pessoa pessoa) {
