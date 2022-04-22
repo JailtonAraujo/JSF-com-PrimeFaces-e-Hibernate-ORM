@@ -43,7 +43,7 @@ public class filterMain implements Filter {
 			
 		}
 		
-		else if((!url.equalsIgnoreCase("/index.jsf?faces-redirect=true") && usuarioLogado == null)) {
+		else if((!url.equalsIgnoreCase("/index.jsf") && usuarioLogado == null)) {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsf?faces-redirect=true");
 			dispatcher.forward(request, response);

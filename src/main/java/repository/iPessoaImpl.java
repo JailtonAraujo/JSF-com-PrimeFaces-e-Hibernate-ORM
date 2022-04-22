@@ -2,6 +2,8 @@ package repository;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -43,6 +45,27 @@ public class iPessoaImpl implements Serializable, iPessoa{
 		entityManager.close();
 		
 		return usuarioLogado;
+	}
+
+	@Override
+	public List<Pessoa> searchUsers(String name) {
+		
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select new model.Pessoa(p.id, p.nome, p.sobrenome, p.login, p.senha) from Pessoa p where p.nome like '").append(name).append("%' order by p.id desc");
+		
+		List<Pessoa> listPersons = new ArrayList<Pessoa>();
+		
+		listPersons = entityManager.createQuery(sql.toString(), Pessoa.class).setMaxResults(10).getResultList();
+		
+		transaction.commit();
+		entityManager.close();
+		
+		return listPersons;
 	}
 
 }

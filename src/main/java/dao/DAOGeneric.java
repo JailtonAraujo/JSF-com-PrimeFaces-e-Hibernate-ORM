@@ -13,13 +13,65 @@ public class DAOGeneric <E>{
 		EntityTransaction transaction = entityManager.getTransaction();
 		
 		transaction.begin();
-		
+		try {
 		E object = entityManager.merge(entity);
 		
 		transaction.commit();
-		entityManager.close();
 		
 		return object;
+		}catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			return null;
+		}finally {
+			entityManager.close();
+		}
 	}
 	
+	public boolean deletar(Long id) {
+		
+		
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		try {
+		entityManager.createNativeQuery("delete from pessoa where id = "+id+" ").executeUpdate();
+		
+		transaction.commit();
+		
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			return false;
+		}finally {
+			entityManager.close();
+		}
+	}
+	
+	public E buscarEntity (Long id, Class<E> entidade ) {
+		
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		try {
+			
+			E object = entityManager.find(entidade, id);
+			
+			transaction.commit();
+			 
+			return object;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			return null;
+		}finally {
+			entityManager.close();
+		}
+	}
 }
