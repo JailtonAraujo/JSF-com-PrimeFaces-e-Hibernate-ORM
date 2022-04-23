@@ -74,4 +74,5 @@ public class DAOGeneric <E>{
 			entityManager.close();
 		}
 	}
+	
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -92,6 +93,14 @@ public class pessoaBean implements Serializable{
 		pessoa = daoGeneric.buscarEntity(pessoa.getId(), Pessoa.class);
 		GerarMSG("Usuario carregado para edição");
 		return "/pages/principal.jsf?faces-redirect=true";
+	}
+	
+	@PostConstruct
+	public boolean verificarUsuarioExist() {
+		if(pessoa.getId() != null) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void setPessoa(Pessoa pessoa) {

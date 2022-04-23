@@ -20,73 +20,48 @@
 	
 	<h:form styleClass="container" id="formCad">
 	
-	 <p:panel id="toggleable" header="CADASTRO DE USUARIO" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px" styleClass="panel-main">
+	 <p:panel id="toggleable" header="CADASTRO DE TELEFONES" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px" styleClass="panel-main">
         <h:panelGrid columns="2" style="width:100%;" columnClasses="colunm"> 
         <p:outputLabel value="ID:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" styleClass="inputs" id="id"/>
+        <p:inputText  value="#{telefoneBean.usuario.id}" readonly="true" styleClass="inputs" id="id"/>
         
         <p:outputLabel value="Nome:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.nome}" styleClass="inputs" id="nome"/>
+        <p:inputText  value="#{telefoneBean.usuario.nome}" styleClass="inputs" id="nome" readonly="true"/>
         
-        <p:outputLabel value="Sobrenome:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.sobrenome}" styleClass="inputs" id="sobrenome"/>
-        
-        <p:outputLabel value="Login:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.login}" styleClass="inputs" id="login"/>
-        
-        <p:outputLabel value="Senha:" styleClass="labels"/>
-        <p:password value="#{pessoaBean.pessoa.senha}" styleClass="inputs" id="senha"/>
+        <p:outputLabel value="Numero" styleClass="labels"/>
+        <p:inputText  value="#{telefoneBean.telefone.numero}" styleClass="inputs" id="numero"/>
         
      
         <p:commandButton value="Salvar" >
-        	<f:ajax event="click" render="toggleable" listener="#{pessoaBean.salvar}"/>
+        	<f:ajax event="click" render="@form" listener="#{telefoneBean.salvar}"/>
         </p:commandButton>
     	<p:commandButton value="Limpar">
-    		<f:ajax event="click" listener="#{pessoaBean.limpar}" render="id nome sobrenome login senha" execute="@this" immediate="true"/>
-    	</p:commandButton>
-    	<p:commandButton value="Telefones" >
-    		<f:ajax event="click" listener="#{pessoaBean.limpar}" render="id nome sobrenome login senha" execute="@this" immediate="true"/>
+    		<f:ajax event="click"  render="numero" execute="@this" immediate="true"/>
     	</p:commandButton>
     	
     	  
         </h:panelGrid>
         </p:panel>
- 
-	</h:form>
-	
-	 <h:form id="formTable">
-	  <p:commandButton value="Buscar">
-    	  	<f:ajax event="click" listener="#{pessoaBean.carregarListPerson}" render="@form" execute="nameSearch"/>
-    	  </p:commandButton>
-    	  <p:inputText value="#{pessoaBean.pessoa.nome}" id="nameSearch"/>
-		<p:dataTable value="#{pessoaBean.usuarios}" var="pers" id="tblUsers" >
+ 		
+ 		
+	 <h:form id="formTable" >
+		<p:dataTable  var="tele" value="#{telefoneBean.telefones}" id="tblTels" >
 			 <p:column headerText="Id">
-       			 <h:outputText value="#{pers.id}" />
+       			 <h:outputText value="#{tele.id}" />
     		 </p:column>
-    		 <p:column headerText="Nome">
-       			 <h:outputText value="#{pers.nome}" />
-    		 </p:column>
-    		 <p:column headerText="Sobrenome">
-       			 <h:outputText value="#{pers.sobrenome}" />
-    		 </p:column>
-    		 <p:column headerText="Login">
-       			 <h:outputText value="#{pers.login}" />
+    		  <p:column headerText="Numero">
+       			 <h:outputText value="#{tele.numero}" />
     		 </p:column>
     		 <p:column headerText="Excluir">
        			 <p:commandButton value="EXCLUIR" >
-       			 	<f:setPropertyActionListener value="#{pers.id}" target="#{pessoaBean.pessoa.id}"/>
-       			 	<f:ajax event="click" listener="#{pessoaBean.deletar}" render="@form" immediate="true"/>
+       			 	<f:ajax event="click"  render="@form" immediate="true"/>
        			 </p:commandButton>
        			
     		 </p:column>
-    		 <p:column headerText="Editar">
-       			 <p:commandButton value="EDITAR" id="btnedit">
-       			 	<f:setPropertyActionListener value="#{pers}" target="#{pessoaBean.pessoa}"/>
-       			 	<f:ajax event="click" execute="btnedit" render="formCad"/>
-       			 </p:commandButton>
-    		 </p:column>
 		</p:dataTable>
 	
+	</h:form>	
+ 	
 	</h:form>
 
 </h:body>
