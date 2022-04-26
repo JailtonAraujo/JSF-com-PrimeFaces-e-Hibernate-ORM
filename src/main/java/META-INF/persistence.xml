@@ -5,6 +5,7 @@
 		
 		<class>model.Pessoa</class>
 		<class>model.Telefone</class>
+		<class>model.Lancamento</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

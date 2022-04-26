@@ -53,8 +53,9 @@
        			 <h:outputText value="#{tele.numero}" />
     		 </p:column>
     		 <p:column headerText="Excluir">
-       			 <p:commandButton value="EXCLUIR" >
-       			 	<f:ajax event="click"  render="@form" immediate="true"/>
+       			 <p:commandButton value="EXCLUIR" immediate="true">
+       			 	<f:setPropertyActionListener value="#{tele.id}" target="#{telefoneBean.telefone.id}"/>
+       			 	<f:ajax event="click"  render="@form" immediate="true" listener="#{telefoneBean.deletar}"/>
        			 </p:commandButton>
        			
     		 </p:column>

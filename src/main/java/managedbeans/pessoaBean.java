@@ -79,7 +79,7 @@ public class pessoaBean implements Serializable{
 	}
 	
 	public void deletar() {
-		if(daoGeneric.deletar(pessoa.getId())) {
+		if(daoGeneric.deletar(pessoa.getId(), Pessoa.class)) {
 			GerarMSG("Excluido com sucesso!");
 		}
 	}

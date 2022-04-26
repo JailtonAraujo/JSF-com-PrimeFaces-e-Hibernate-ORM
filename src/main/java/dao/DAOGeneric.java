@@ -28,7 +28,7 @@ public class DAOGeneric <E>{
 		}
 	}
 	
-	public boolean deletar(Long id) {
+	public boolean deletar(Long id, Class<E> entidade) {
 		
 		
 		EntityManager entityManager = JPAUtil.getEntityManager();
@@ -37,7 +37,7 @@ public class DAOGeneric <E>{
 		transaction.begin();
 		
 		try {
-		entityManager.createNativeQuery("delete from pessoa where id = "+id+" ").executeUpdate();
+		entityManager.createNativeQuery("delete from "+entidade.getSimpleName().toLowerCase()+" where id = "+id+" ").executeUpdate();
 		
 		transaction.commit();
 		

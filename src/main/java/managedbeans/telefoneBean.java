@@ -63,6 +63,16 @@ public class telefoneBean implements Serializable {
 	public void gerarMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 	}
+	
+	public String deletar() {
+		if(daoGeneric.deletar(telefone.getId(), Telefone.class)) {
+			gerarMsg("Excluido com sucesso!");
+			carregarTelefones();
+		}else {
+		gerarMsg("Erro ao tentar excluir o telefone selecionado!");
+		}
+		return "";
+	}
 
 	public Pessoa getUsuario() {
 		return usuario;
