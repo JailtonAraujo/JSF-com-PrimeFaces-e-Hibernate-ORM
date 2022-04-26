@@ -26,16 +26,16 @@
         <p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" styleClass="inputs" id="id"/>
         
         <p:outputLabel value="Nome:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.nome}" styleClass="inputs" id="nome"/>
+        <p:inputText value="#{pessoaBean.pessoa.nome}" styleClass="inputs" id="nome" required="true" requiredMessage="Nome é obrigatorio!"/>
         
         <p:outputLabel value="Sobrenome:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.sobrenome}" styleClass="inputs" id="sobrenome"/>
+        <p:inputText value="#{pessoaBean.pessoa.sobrenome}" styleClass="inputs" id="sobrenome" required="true" requiredMessage="Sobrenome é obrigatorio!"/>
         
         <p:outputLabel value="Login:" styleClass="labels"/>
-        <p:inputText value="#{pessoaBean.pessoa.login}" styleClass="inputs" id="login"/>
+        <p:inputText value="#{pessoaBean.pessoa.login}" styleClass="inputs" id="login" required="true" requiredMessage="Login é obrigatorio!"/>
         
         <p:outputLabel value="Senha:" styleClass="labels"/>
-        <p:password value="#{pessoaBean.pessoa.senha}" styleClass="inputs" id="senha"/>
+        <p:password value="#{pessoaBean.pessoa.senha}" styleClass="inputs" id="senha" required="true" requiredMessage="Senha é obrigatorio!"/>
         
      
         <p:commandButton value="Salvar" >

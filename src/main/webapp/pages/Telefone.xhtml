@@ -29,7 +29,7 @@
         <p:inputText  value="#{telefoneBean.usuario.nome}" styleClass="inputs" id="nome" readonly="true"/>
         
         <p:outputLabel value="Numero" styleClass="labels"/>
-        <p:inputText  value="#{telefoneBean.telefone.numero}" styleClass="inputs" id="numero"/>
+        <p:inputText  value="#{telefoneBean.telefone.numero}" styleClass="inputs" id="numero" required="true" requiredMessage="Numero é obrigatorio!"/>
         
      
         <p:commandButton value="Salvar" >

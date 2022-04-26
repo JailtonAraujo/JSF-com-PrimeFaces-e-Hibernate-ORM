@@ -26,13 +26,13 @@
         <p:inputText  value="#{lancementoBean.lancamento.id}" readonly="true" styleClass="inputs" id="id"/>
         
         <p:outputLabel value="Nota Fiscal:" styleClass="labels"/>
-        <p:inputText  value="#{lancementoBean.lancamento.numeroNota}" styleClass="inputs" id="nome" />
+        <p:inputText  value="#{lancementoBean.lancamento.numeroNota}" styleClass="inputs" id="nome" required="true" requiredMessage="Nota fiscal é obrigatoria!"/>
         
         <p:outputLabel value="Valor:" styleClass="labels"/>
-        <p:inputNumber value="#{lancementoBean.lancamento.valor}" styleClass="inputs" id="numero" symbol="R$" symbolPosition="p"/>
+        <p:inputNumber value="#{lancementoBean.lancamento.valor}" styleClass="inputs" id="numero" symbol="R$" symbolPosition="p" required="true"  requiredMessage="É obrigatorio informar o valor"/>
        
        <p:outputLabel value="Data:" styleClass="labels"/>
-        <p:datePicker value="#{lancementoBean.lancamento.dataLancamento}" readonly="true"/>
+        <p:calendar value="#{lancementoBean.lancamento.dataLancamento}" readonly="true"/>
      
         <p:commandButton value="Salvar" >
         	<f:ajax event="click" render="@form" listener="#{lancementoBean.salvar}"/>
@@ -48,9 +48,9 @@
  		
 	 <h:form id="formTable" >
 	 	<p:commandButton value="BUSCAR" id="btnBuscar">
-	 		<f:ajax event="click" render="@form" immediate="true" listener="#{lancementoBean.consultarLancamentos}"/>
+	 		<f:ajax event="click" render="@form" immediate="true"  execute="dataInput" listener="#{lancementoBean.consultarLancamentos}"/>
 	 	</p:commandButton>
-	 	<p:datePicker id="button" showIcon="true" pattern="dd/MM/yyyy" value="#{lancementoBean.dataConsulta}"/>
+	 	<p:calendar id="dataInput"  value="#{lancementoBean.dataConsulta}" pattern="dd/MM/yyyy"/>
 		<p:dataTable  var="lan" value="#{lancementoBean.lancamentos}" id="tblLanc" >
 			 <p:column headerText="Id">
        			 <h:outputText  value="#{lan.id}"/>
