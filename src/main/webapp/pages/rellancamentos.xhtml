@@ -25,33 +25,33 @@
        
         
         <p:outputLabel value="Data Inicial" for="dataInicial"  styleClass="labels"/>
-        <p:calendar pattern="dd/MM/yyyy" id="dataInicial"/>
+        <p:calendar pattern="dd/MM/yyyy" id="dataInicial" value="#{relLancamentoBean.dataInicial}"/>
         
          <p:outputLabel value="Data Final" for="dataFinal"  styleClass="labels"/>
-        <p:calendar pattern="dd/MM/yyyy" id="dataFinal"/>
+        <p:calendar pattern="dd/MM/yyyy" id="dataFinal" value="#{relLancamentoBean.dataFinal}"/>
         
-         <p:commandButton value="Gerar Grafico" style="width:180px;">
-        	<f:ajax event="click" render="@form" listener="#{lancementoBean.salvar}"/>
+         <p:commandButton value="Gerar Grafico" style="width:180px;" id="btnGraf">
+        	<f:ajax event="click" render="grafico" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarGrafico}"/>
         </p:commandButton>
-          <p:commandButton value="Listar" style="width:180px;">
-        	<f:ajax event="click" render="@form" listener="#{lancementoBean.salvar}"/>
+          <p:commandButton value="Gerar Relatorio" style="width:180px;" id="btnRel">
+        	<f:ajax event="click" render="formTable" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarRalatorio}"/>
         </p:commandButton>
         
         </h:panelGrid>
         </p:panel>
         
-       <p:chart type="bar" model="#{relLancamentoBean.barChartModel}" style="height:300px"/>
+       <p:chart type="bar" model="#{relLancamentoBean.barChartModel}" style="height:300px" id="grafico"/>
  		
  		
 	 <h:form id="formTable" >
-		<p:dataTable  var="lan" value="#{lancementoBean.lancamentos}" id="tblLanc" >
-			 <p:column headerText="Id">
-       			 <h:outputText  value="#{lan.id}"/>
+		<p:dataTable  var="lan" value="#{relLancamentoBean.lancamentos}" id="tblLanc" >
+			 <p:column headerText="Nome Usuario:">
+       			 <h:outputText  value="#{lan.usuario.nome}"/>
     		 </p:column>
     		  <p:column headerText="Data:">
        			 <h:outputText value="#{lan.dataLancamento}"/>
     		 </p:column>
-    		   <p:column headerText="Valor:">
+    		   <p:column headerText="Receita:">
        			 <h:outputText value="#{lan.valor}"/>
     		 </p:column>
 		</p:dataTable>

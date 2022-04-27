@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
 
@@ -39,6 +40,9 @@ public class Lancamento implements Serializable {
 	@ForeignKey(name = "fk_usuario_lancamento")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Pessoa usuario;
+	
+	@Transient
+	private String month;
 
 	public Lancamento() {
 	}
@@ -94,6 +98,14 @@ public class Lancamento implements Serializable {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	
+	public String getMonth() {
+		return month;
+	}
+	
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
 	@Override

@@ -7,4 +7,6 @@ import model.Lancamento;
 public interface iLancamento {
 
 	public List<Lancamento> carregarLancamentos(Long userId, String dataConsulta);
+	
+	public List<Lancamento> consultarLancamentosIntervalo(String dataInicial, String dataFinal);
 }
