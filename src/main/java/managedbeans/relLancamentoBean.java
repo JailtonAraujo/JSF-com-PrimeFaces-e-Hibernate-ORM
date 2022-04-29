@@ -43,11 +43,10 @@ public class relLancamentoBean implements Serializable {
 		
 		lancamentos =  iLancamento.consultarLancamentosIntervalo(format.format(dataInicial).toString(), format.format(dataFinal).toString());
 		
+		GerarGrafico();
 	}
 	
 	public void GerarGrafico() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		lancamentos =  iLancamento.consultarLancamentosIntervalo(format.format(dataInicial).toString(), format.format(dataFinal).toString());
 		lancamentos = replaceMonthToData.replaceNameMonthLancemento(lancamentos);
 		
 		ChartSeries chartSeries = new ChartSeries();

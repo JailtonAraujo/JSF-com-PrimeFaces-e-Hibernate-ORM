@@ -29,11 +29,8 @@
         
          <p:outputLabel value="Data Final" for="dataFinal"  styleClass="labels"/>
         <p:calendar pattern="dd/MM/yyyy" id="dataFinal" value="#{relLancamentoBean.dataFinal}" required="true" requiredMessage="è obrigatorio informar uma data final!"/>
-        
-         <p:commandButton value="Gerar Grafico" style="width:180px;" id="btnGraf">
-        	<f:ajax event="click" render="grafico" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarGrafico}"/>
-        </p:commandButton>
-          <p:commandButton value="Gerar Relatorio" style="width:180px;" id="btnRel">
+     
+          <p:commandButton value="Gerar Relatorio" style="width:196px;" id="btnRel">
         	<f:ajax event="click" render="@form formTable" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarRalatorio}"/>
         </p:commandButton>
         
