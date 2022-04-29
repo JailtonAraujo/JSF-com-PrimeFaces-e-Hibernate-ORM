@@ -20,7 +20,6 @@ public class replaceMonthToData implements Serializable{
 				Date date = new Date();
 				try {
 					date = new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(lancamento.getDataLancamento()));
-					System.out.println(date);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,8 +31,12 @@ public class Pessoa implements Serializable {
 
 	private String senha;
 
-	@OneToMany(mappedBy = "pessoa", cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.REFRESH})
-	private List<Telefone> telefones;
+	@OneToMany(mappedBy = "pessoa", cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+	private List<Telefone> telefones = new ArrayList<Telefone>();
+
+	@OneToMany(mappedBy = "pessoa", cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
+			CascadeType.REFRESH }, orphanRemoval = true)
+	private List<Email> emails = new ArrayList<Email>();
 
 	public Pessoa() {
 	}
@@ -90,6 +95,14 @@ public class Pessoa implements Serializable {
 
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
+	}
+
+	public List<Email> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
 	}
 
 	@Override

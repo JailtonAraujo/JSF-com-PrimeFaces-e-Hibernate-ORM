@@ -37,7 +37,7 @@ public class lancamentoBean implements Serializable{
 	
 	public String salvar() {
 		lancamento.setUsuario(getUserLogado());
-		lancamento = daoGeneric.salvar(lancamento);
+		lancamento = daoGeneric.salvarMerge(lancamento);
 		gerarMsg("Salvo com suceso!");
 		
 		return "";

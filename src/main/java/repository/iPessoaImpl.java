@@ -68,4 +68,41 @@ public class iPessoaImpl implements Serializable, iPessoa{
 		return listPersons;
 	}
 
+	@Override
+	public List<Pessoa> buscarPaginator(int first, int pageSize, String nome) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select new model.Pessoa(p.id, p.nome, p.sobrenome, p.login, p.senha) from Pessoa p where p.nome like '").append(nome).append("%'");
+		
+		List<Pessoa> listPersons = new ArrayList<Pessoa>();
+		
+		listPersons = entityManager.createQuery(sql.toString(), Pessoa.class).setFirstResult(first).setMaxResults(pageSize).getResultList();
+		
+		transaction.commit();
+		entityManager.close();
+		
+		return listPersons;
+	}
+
+	@Override
+	public Integer countPaginator(String nomeBusca) {
+		
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		String quant = entityManager.createQuery("select count(1) from Pessoa p where p.nome like '"+nomeBusca+"%' ").getSingleResult().toString();
+		
+		transaction.commit();
+		
+		entityManager.close();
+		
+		return Integer.parseInt(quant);
+	}
+
 }

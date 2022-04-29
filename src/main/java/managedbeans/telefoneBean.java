@@ -47,7 +47,7 @@ public class telefoneBean implements Serializable {
 		
 		telefone.setPessoa(usuario);
 		
-		daoGeneric.salvar(telefone);
+		daoGeneric.salvarMerge(telefone);
 		gerarMsg("Salvo com sucesso!");
 		
 		carregarTelefones();

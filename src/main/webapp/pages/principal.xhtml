@@ -41,7 +41,7 @@
         <p:commandButton value="Salvar" >
         	<f:ajax event="click" render="toggleable" listener="#{pessoaBean.salvar}"/>
         </p:commandButton>
-    	<p:commandButton value="Limpar">
+    	<p:commandButton value="Limpar" resetValues="true" immediate="true">
     		<f:ajax event="click" listener="#{pessoaBean.limpar}" render="@form" execute="@this" immediate="true"/>
     	</p:commandButton>
     
@@ -57,10 +57,11 @@
 	
 	 <h:form id="formTable">
 	  <p:commandButton value="Buscar">
-    	  	<f:ajax event="click" listener="#{pessoaBean.carregarListPerson}" render="@form" execute="nameSearch"/>
+    	  	<f:ajax event="click" listener="#{pessoaBean.pesquisar}" render="@form" execute="nameSearch"/>
     	  </p:commandButton>
     	  <p:inputText value="#{pessoaBean.pessoa.nome}" id="nameSearch"/>
-		<p:dataTable value="#{pessoaBean.usuarios}" var="pers" id="tblUsers" >
+		<p:dataTable value="#{pessoaBean.listUsuarios}" var="pers" id="tblUsers" 
+		rows="5" paginator="true" lazy="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
 			 <p:column headerText="Id">
        			 <h:outputText value="#{pers.id}" />
     		 </p:column>
@@ -73,11 +74,17 @@
     		 <p:column headerText="Login">
        			 <h:outputText value="#{pers.login}" />
     		 </p:column>
+    		 <p:column headerText="E-mails">
+    		 	<p:commandLink update=":formTable:dialogEmail" oncomplete="PF('dialogEmail').show()" immediate="true" action="#{emailBean.carregarEmails}">
+    		 		<h:graphicImage url="/resources/img/email.png" width="25" height="25" title="E-mails"/>
+    		 		<f:setPropertyActionListener value="#{pers.id}" target="#{emailBean.usuario.id}"/>
+    		 	</p:commandLink>
+    		 </p:column>
     		 <p:column headerText="Excluir">
-       			 <p:commandButton value="EXCLUIR" >
+       			 <p:commandLink  action="#{pessoaBean.deletar}" update="tblUsers">
+       			 	<h:graphicImage url="/resources/img/botao-x.png"/>
        			 	<f:setPropertyActionListener value="#{pers.id}" target="#{pessoaBean.pessoa.id}"/>
-       			 	<f:ajax event="click" listener="#{pessoaBean.deletar}" render="@form" immediate="true"/>
-       			 </p:commandButton>
+       			 </p:commandLink>
        			
     		 </p:column>
     		 <p:column headerText="Editar">
@@ -87,6 +94,25 @@
        			 </p:commandButton>
     		 </p:column>
 		</p:dataTable>
+		
+		<p:dialog header="E-mails" id="dialogEmail" widgetVar="dialogEmail" position="center" modal="true" resizable="false" responsive="true" width="500px">
+			<h:panelGrid columns="3">
+				<p:outputLabel value="Email:"/>
+				<p:inputText value="#{emailBean.email.email}"/>
+				<p:commandLink value="Adicionar" action="#{emailBean.addEmail}" update="tblEmail"/>
+			</h:panelGrid>
+			<p:dataTable id="tblEmail" var="em" value="#{emailBean.emails}" style="width:100%;">
+					<p:column headerText="Email">
+						<h:outputText value="#{em.email}"/>
+					</p:column>
+					<p:column headerText="Excluir">
+						<p:commandLink immediate="true" action="#{emailBean.deletar}" update="tblEmail">
+							<h:graphicImage url="/resources/img/botao-x.png" width="25" height="25" title="Excluir"/>
+							<f:setPropertyActionListener value="#{em.id}" target="#{emailBean.email.id}"/>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+		</p:dialog>
 	
 	</h:form>
 

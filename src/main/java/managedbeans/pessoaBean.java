@@ -14,7 +14,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.DAOGeneric;
+import dataTableLazy.LazyDataTableModelPessoa;
+import model.Email;
 import model.Pessoa;
+import repository.iEmail;
+import repository.iEmailImpl;
 import repository.iPessoa;
 import repository.iPessoaImpl;
 
@@ -26,14 +30,20 @@ public class pessoaBean implements Serializable{
 
 	private Pessoa pessoa = new Pessoa();
 	
-	private List<Pessoa> usuarios = new ArrayList<Pessoa>();
+	private LazyDataTableModelPessoa<Pessoa> listUsuarios = new LazyDataTableModelPessoa<Pessoa>();
 	
 	DAOGeneric<Pessoa> daoGeneric = new DAOGeneric<Pessoa>();
 	iPessoa iPessoa = new iPessoaImpl();
 	
+	@PostConstruct
+	public void init() {
+		listUsuarios.load(0, 5, null, null, null);
+		verificarUsuarioExist();
+	}
+	
 	public String salvar() {
 		try {
-		pessoa = daoGeneric.salvar(pessoa);
+		pessoa = daoGeneric.salvarMerge(pessoa);
 		GerarMSG("Salvo com Sucesso!");
 		}catch (Exception e) {
 			GerarMSG(e.getMessage());
@@ -74,8 +84,9 @@ public class pessoaBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(msg));
 	}
 	
-	public void carregarListPerson() {
-		usuarios = iPessoa.searchUsers(pessoa.getNome());
+	
+	public void pesquisar() {
+		listUsuarios.pesquisarNome(pessoa.getNome());
 	}
 	
 	public void deletar() {
@@ -95,13 +106,13 @@ public class pessoaBean implements Serializable{
 		return "/pages/principal.jsf?faces-redirect=true";
 	}
 	
-	@PostConstruct
 	public boolean verificarUsuarioExist() {
 		if(pessoa.getId() != null) {
 			return true;
 		}
 		return false;
 	}
+
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
@@ -111,11 +122,10 @@ public class pessoaBean implements Serializable{
 		return pessoa;
 	}
 	
-	public List<Pessoa> getUsuarios() {
-		return usuarios;
+	
+	public LazyDataTableModelPessoa<Pessoa> getListUsuarios() {
+		return listUsuarios;
 	}
 	
-	public void setUsuarios(List<Pessoa> usuarios) {
-		this.usuarios = usuarios;
-	}
+	
 }
