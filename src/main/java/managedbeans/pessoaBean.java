@@ -51,33 +51,7 @@ public class pessoaBean implements Serializable{
 		return "";
 	}
 	
-	public String logar() {
-		Pessoa usuarioLogado = iPessoa.logar(pessoa);
-		
-		if(usuarioLogado != null && usuarioLogado.getId() != null) {
-			
-			FacesContext context = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("usuarioLogado", usuarioLogado);
-			
-			return "pages/principal.jsf?faces-redirect=true";
-		}
-		
-		GerarMSG("Usuario ou Senha Incorretos!");
-		return "index.jsf?faces-redirect=true";
-	}
 	
-	public String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().remove("usuarioLogado");
-
-		@SuppressWarnings("static-access")
-		HttpServletRequest request = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
-				.getRequest();
-		request.getSession().invalidate();
-
-		return "/index.jsf?faces-redirect=true";
-	}
 	
 	
 	public void GerarMSG(String msg) {

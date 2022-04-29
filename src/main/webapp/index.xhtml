@@ -22,12 +22,12 @@
 		<p:panel id="basic" header="LOGIN" style="margin-bottom:20px; width:600px;" styleClass="panelMain">
         	<h:panelGrid columns="1" styleClass="panelG">
         	<p:outputLabel value="LOGIN:" for="txtLogin"/>
-        	<p:inputText value="#{pessoaBean.pessoa.login}" id="txtLogin" styleClass="inputs"/>
+        	<p:inputText value="#{loginBean.usuario.login}" id="txtLogin" styleClass="inputs" required="true" requiredMessage="Login Obrigatorio!"/>
         	
         	<p:outputLabel value="SENHA:" for="txtSenha"/>
-        	<p:password value="#{pessoaBean.pessoa.senha}" id="txtSenha" label="Senha:" styleClass="inputs"/>
+        	<p:password value="#{loginBean.usuario.senha}" id="txtSenha" label="Senha:" styleClass="inputs" required="true" requiredMessage="Senha Obrigatorio!"/>
    			</h:panelGrid>
-   			<p:commandButton action="#{pessoaBean.logar}" value="LOGAR" />
+   			<p:commandButton action="#{loginBean.logar}" value="LOGAR" />
    			<p:commandButton value="CADASTRE-SE" styleClass="btnCad"/>
     	
 		</p:panel>
