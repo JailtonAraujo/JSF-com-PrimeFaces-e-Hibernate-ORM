@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
@@ -40,10 +42,15 @@ public class relLancamentoBean implements Serializable {
 	public void GerarRalatorio() {
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
+		try {
 		lancamentos =  iLancamento.consultarLancamentosIntervalo(format.format(dataInicial).toString(), format.format(dataFinal).toString());
 		
-		GerarGrafico();
+		if(lancamentos.size() > 0 && lancamentos!= null) {
+			GerarGrafico();
+		}
+		}catch (NullPointerException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Nenhum Resultado encontrado!"));
+		}
 	}
 	
 	public void GerarGrafico() {
@@ -57,6 +64,11 @@ public class relLancamentoBean implements Serializable {
 		
 		barChartModel.addSeries(chartSeries);
 		barChartModel.setTitle("Grafico de Receita Mensal");
+	}
+	
+	public void zerarGrafico() {
+		barChartModel = new BarChartModel();
+		lancamentos.clear();
 	}
 
 	public BarChartModel getBarChartModel() {

@@ -31,7 +31,11 @@
         <p:calendar pattern="dd/MM/yyyy" id="dataFinal" value="#{relLancamentoBean.dataFinal}" required="true" requiredMessage="è obrigatorio informar uma data final!"/>
      
           <p:commandButton value="Gerar Relatorio" style="width:196px;" id="btnRel">
-        	<f:ajax event="click" render="@form formTable" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarRalatorio}"/>
+        	<f:ajax event="click" render="@form formTable messages" execute="dataInicial dataFinal" listener="#{relLancamentoBean.GerarRalatorio}"/>
+        </p:commandButton>
+        
+         <p:commandButton value="Zerar Relatorio" style="width:196px;" id="btnRelZerar">
+        	<f:ajax event="click" render="@form formTable" execute="dataInicial dataFinal" listener="#{relLancamentoBean.zerarGrafico}"/>
         </p:commandButton>
         
         </h:panelGrid>

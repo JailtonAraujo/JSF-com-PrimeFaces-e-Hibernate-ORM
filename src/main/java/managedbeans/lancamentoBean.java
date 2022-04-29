@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dao.DAOGeneric;
+import dataTableLazy.LazyDataTableModelLancamento;
 import model.Lancamento;
 import model.Pessoa;
 import repository.iLancamento;
@@ -29,7 +30,7 @@ public class lancamentoBean implements Serializable{
 
 	private DAOGeneric<Lancamento> daoGeneric = new DAOGeneric<Lancamento>();
 	
-	private List<Lancamento> lancamentos = new ArrayList<Lancamento>();
+	private LazyDataTableModelLancamento<Lancamento> listLancamentos = new LazyDataTableModelLancamento<Lancamento>();
 	
 	private iLancamento iLancamento = new iLancamentoImpl();
 	
@@ -45,7 +46,8 @@ public class lancamentoBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		
+		listLancamentos.setIdUser(getUserLogado().getId());
+		listLancamentos.load(0, 5, null, null, null);
 	}
 	
 	public void limpar() {
@@ -56,9 +58,9 @@ public class lancamentoBean implements Serializable{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		if(dataConsulta != null && !dataConsulta.toString().trim().isEmpty()) {
-			lancamentos = iLancamento.carregarLancamentos(getUserLogado().getId(), format.format(dataConsulta).toString());
+			listLancamentos.pesquisarData(format.format(dataConsulta).toString());
 		}else {
-			lancamentos = iLancamento.carregarLancamentos(getUserLogado().getId(), null);
+			listLancamentos.pesquisarData(null);
 		}
 		return "";
 	}
@@ -81,14 +83,16 @@ public class lancamentoBean implements Serializable{
 		return lancamento;
 	}
 	
-	public List<Lancamento> getLancamentos() {
-		return lancamentos;
-	}
 	
-	public void setLancamentos(List<Lancamento> lancamentos) {
-		this.lancamentos = lancamentos;
-	}
 	
+	public LazyDataTableModelLancamento<Lancamento> getListLancamentos() {
+		return listLancamentos;
+	}
+
+	public void setListLancamentos(LazyDataTableModelLancamento<Lancamento> listLancamentos) {
+		this.listLancamentos = listLancamentos;
+	}
+
 	public Date getDataConsulta() {
 		return dataConsulta;
 	}

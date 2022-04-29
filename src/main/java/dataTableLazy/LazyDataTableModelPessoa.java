@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
-import jpautil.JPAUtil;
 import model.Pessoa;
 import repository.iPessoa;
 import repository.iPessoaImpl;

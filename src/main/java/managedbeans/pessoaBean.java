@@ -39,6 +39,7 @@ public class pessoaBean implements Serializable{
 	public void init() {
 		listUsuarios.load(0, 5, null, null, null);
 		verificarUsuarioExist();
+		return;
 	}
 	
 	public String salvar() {
@@ -50,8 +51,6 @@ public class pessoaBean implements Serializable{
 		}
 		return "";
 	}
-	
-	
 	
 	
 	public void GerarMSG(String msg) {

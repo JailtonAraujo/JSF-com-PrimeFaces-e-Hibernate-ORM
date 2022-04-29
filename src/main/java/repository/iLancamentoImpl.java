@@ -20,7 +20,7 @@ public class iLancamentoImpl implements Serializable, iLancamento{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public List<Lancamento> carregarLancamentos(Long userId, String dataConsulta) {
+	public List<Lancamento> carregarLancamentos(Long userId, String dataConsulta, int first, int pageSize) {
 		
 		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -40,7 +40,7 @@ public class iLancamentoImpl implements Serializable, iLancamento{
 		
 		try {
 			
-			lancamentos = entityManager.createQuery(sql.toString(), Lancamento.class).getResultList();
+			lancamentos = entityManager.createQuery(sql.toString(), Lancamento.class).setFirstResult(first).setMaxResults(pageSize).getResultList();
 			
 			transaction.commit();
 			
@@ -101,9 +101,30 @@ public class iLancamentoImpl implements Serializable, iLancamento{
 		}finally {
 			entityManager.close();
 		}
-		
-		
 		return null;
+	}
+	
+	@Override
+	public Integer count(String dataConsulta, Long userID) {
+
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		StringBuilder sql = new StringBuilder();
+		
+		if(dataConsulta != null && !dataConsulta.trim().isEmpty()) {
+			sql.append("select count(1) from lancamentos l where l.dataLancamento = '").append(dataConsulta)
+			.append("' and l.id_usuario = ").append(userID);
+		}else {
+			sql.append("select count(1) from lancamentos l where l.id_usuario = ").append(userID);
+		}
+		
+		
+		String quant = (String) entityManager.createNativeQuery(sql.toString()).getSingleResult().toString();
+		
+		return Integer.parseInt(quant);
 	}
 	
 	

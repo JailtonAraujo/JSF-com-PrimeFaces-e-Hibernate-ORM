@@ -50,7 +50,7 @@
         <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
  
         <f:facet name="options">
-            <p:commandButton type="button" value="Logout" icon="pi pi-home" action="#{pessoaBean.logout}">
+            <p:commandButton type="button" value="Logout" icon="pi pi-home">
             	<f:ajax event="click" immediate="true" listener="#{loginBean.logout}"/>
             </p:commandButton>
         </f:facet>

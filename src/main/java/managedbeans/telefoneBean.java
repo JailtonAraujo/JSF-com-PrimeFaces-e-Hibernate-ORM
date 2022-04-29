@@ -47,10 +47,10 @@ public class telefoneBean implements Serializable {
 		
 		telefone.setPessoa(usuario);
 		
-		daoGeneric.salvarMerge(telefone);
+		telefone = daoGeneric.salvarMerge(telefone);
+		telefones.add(telefone);
 		gerarMsg("Salvo com sucesso!");
 		
-		carregarTelefones();
 		
 		return "";
 	}
@@ -66,8 +66,8 @@ public class telefoneBean implements Serializable {
 	
 	public String deletar() {
 		if(daoGeneric.deletar(telefone.getId(), Telefone.class)) {
+			telefones.remove(telefone);
 			gerarMsg("Excluido com sucesso!");
-			carregarTelefones();
 		}else {
 		gerarMsg("Erro ao tentar excluir o telefone selecionado!");
 		}

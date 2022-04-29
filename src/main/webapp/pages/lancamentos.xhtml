@@ -51,7 +51,8 @@
 	 		<f:ajax event="click" render="@form" immediate="true"  execute="dataInput" listener="#{lancementoBean.consultarLancamentos}"/>
 	 	</p:commandButton>
 	 	<p:calendar id="dataInput"  value="#{lancementoBean.dataConsulta}" pattern="dd/MM/yyyy"/>
-		<p:dataTable  var="lan" value="#{lancementoBean.lancamentos}" id="tblLanc" >
+		<p:dataTable  var="lan" value="#{lancementoBean.listLancamentos}" id="tblLanc"
+		paginator="true" rows="5" lazy="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink} ">
 			 <p:column headerText="Id">
        			 <h:outputText  value="#{lan.id}"/>
     		 </p:column>
