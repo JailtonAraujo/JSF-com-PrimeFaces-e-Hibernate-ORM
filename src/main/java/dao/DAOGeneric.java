@@ -7,7 +7,7 @@ import jpautil.JPAUtil;
 
 public class DAOGeneric <E>{
 
-	public E salvar(E entity) {
+	public E salvarMerge(E entity) {
 		
 		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -73,6 +73,53 @@ public class DAOGeneric <E>{
 		}finally {
 			entityManager.close();
 		}
+	}
+	
+	
+	public boolean persist (E entidade) {
+		
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		try {
+			
+			entityManager.persist(entidade);
+			
+			transaction.commit();
+			
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}finally {
+			entityManager.close();
+		}
+		
+		return false;
+	}
+	
+	public boolean remove(E entidade) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		try {
+			entityManager.remove(entidade);
+			
+			transaction.commit();
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}finally {
+			entityManager.close();
+		}
+		return false;
 	}
 	
 }
