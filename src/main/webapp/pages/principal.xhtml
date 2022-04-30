@@ -99,13 +99,15 @@
 			<h:panelGrid columns="3">
 				<p:outputLabel value="Email:"/>
 				<p:inputText value="#{emailBean.email.email}"/>
-				<p:commandLink value="Adicionar" action="#{emailBean.addEmail}" update="tblEmail"/>
+				<p:commandLink action="#{emailBean.addEmail}" update="tblEmail">
+					<h:graphicImage url="/resources/img/diskette.png" title="Salvar"/>
+				</p:commandLink>
 			</h:panelGrid>
 			<p:dataTable id="tblEmail" var="em" value="#{emailBean.emails}" style="width:100%;">
 					<p:column headerText="Email">
 						<h:outputText value="#{em.email}"/>
 					</p:column>
-					<p:column headerText="Excluir">
+					<p:column headerText="Excluir" >
 						<p:commandLink immediate="true" action="#{emailBean.deletar}" update="tblEmail">
 							<h:graphicImage url="/resources/img/botao-x.png" width="25" height="25" title="Excluir"/>
 							<f:setPropertyActionListener value="#{em.id}" target="#{emailBean.email.id}"/>

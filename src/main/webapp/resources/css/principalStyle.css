@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html{
+	background-color: darkcyan;
+}
+
 .container{
 	width: 100%;
 	
@@ -23,3 +27,10 @@
 	width: 80px;
 }
 
+.jqplot-target{
+	background-color: aliceblue;
+}
+
+.ui-datatable{
+	margin-top: 20px;
+}

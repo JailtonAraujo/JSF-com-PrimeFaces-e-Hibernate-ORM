@@ -2,9 +2,9 @@ package managedbeans;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import repository.iPessoa;
 import repository.iPessoaImpl;
 
 @ManagedBean(name = "loginBean")
-@RequestScoped
+@ViewScoped
 public class loginBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -44,12 +44,11 @@ public class loginBean implements Serializable{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("usuarioLogado");
 
-		@SuppressWarnings("static-access")
 		HttpServletRequest request = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
 				.getRequest();
 		request.getSession().invalidate();
 
-		return "/index.jsf?faces-redirect=true";
+		return "index.jsf";
 	}
 	
 	public void GerarMSG(String msg) {

@@ -32,13 +32,12 @@
         <p:inputNumber value="#{lancementoBean.lancamento.valor}" styleClass="inputs" id="numero" symbol="R$" symbolPosition="p" required="true"  requiredMessage="É obrigatorio informar o valor"/>
        
        <p:outputLabel value="Data:" styleClass="labels"/>
-        <p:calendar value="#{lancementoBean.lancamento.dataLancamento}" readonly="true"/>
+        <p:calendar value="#{lancementoBean.lancamento.dataLancamento}" readonly="true" id="dataLan"/>
      
-        <p:commandButton value="Salvar" >
-        	<f:ajax event="click" render="@form" listener="#{lancementoBean.salvar}"/>
-        </p:commandButton>
-    	<p:commandButton value="Limpar">
-    		<f:ajax event="click"  render="@form" execute="@this" immediate="true" listener="#{lancementoBean.limpar}"/>
+        <p:commandButton value="Salvar" action="#{lancementoBean.salvar}" update="id nome numero"/>
+        
+    	<p:commandButton value="Limpar" immediate="true">
+    		<f:ajax event="click"  render="id nome numero" immediate="true" listener="#{lancementoBean.limpar}"/>
     	</p:commandButton>
     	
     	  

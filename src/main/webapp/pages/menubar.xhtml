@@ -26,32 +26,12 @@
         <p:submenu label="Lançamentos" icon="pi pi-pencil">
             <p:menuitem value="Vendas" url="lancamentos.jsf" icon="pi pi-angle-double-left" />
         </p:submenu>
+
  
-        <p:submenu label="Help" icon="pi pi-question">
-            <p:menuitem value="Contents" url="#" />
-            <p:submenu label="Search" icon="pi pi-search">
-                <p:submenu label="Text">
-                    <p:menuitem value="Workspace" url="#" />
-                </p:submenu>
-                <p:menuitem value="File" url="#" />
-            </p:submenu>
-        </p:submenu>
- 
-        <p:submenu label="Actions" icon="pi pi-cog">
-            <p:submenu label="Ajax" icon="pi pi-refresh">
-                <p:menuitem value="Save" action="#{menuView.save}" icon="pi pi-save" update="messages"/>
-                <p:menuitem value="Update" action="#{menuView.update}" icon="pi pi-refresh" update="messages"/>
-            </p:submenu>
-            <p:submenu label="Non-Ajax" icon="pi pi-clone">
-                <p:menuitem value="Delete" action="#{menuView.delete}" icon="pi pi-times" update="messages" ajax="false"/>
-            </p:submenu>
-        </p:submenu>
- 
-        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
  
         <f:facet name="options">
-            <p:commandButton type="button" value="Logout" icon="pi pi-home">
-            	<f:ajax event="click" immediate="true" listener="#{loginBean.logout}"/>
+            <p:commandButton type="button" value="Logout" icon="pi pi-home" immediate="true" id="btnSair">
+            	<f:ajax event="click" execute="btnSair" render="@form" immediate="true" listener="#{loginBean.logout}"/>
             </p:commandButton>
         </f:facet>
     </p:menubar>

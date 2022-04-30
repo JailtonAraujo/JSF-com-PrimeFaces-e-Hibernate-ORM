@@ -44,7 +44,7 @@
        <p:chart type="bar" model="#{relLancamentoBean.barChartModel}" style="height:300px" id="grafico"/>
  		
  		
-	 <h:form id="formTable" title="Relatorio de Receita Mensal" >
+	 <h:form id="formTable" title="Relatorio de Receita Mensal" style="margin-top:20px;" >
 		<p:dataTable  var="lan" value="#{relLancamentoBean.lancamentos}" id="tblLanc" >
     		  <p:column headerText="Data:">
        			 <h:outputText value="#{lan.dataLancamento}"/>

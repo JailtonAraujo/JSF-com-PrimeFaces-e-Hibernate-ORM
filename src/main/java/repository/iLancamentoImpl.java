@@ -31,9 +31,9 @@ public class iLancamentoImpl implements Serializable, iLancamento{
 		
 		if(dataConsulta != null && !dataConsulta.trim().isEmpty()) {
 		sql.append("select new model.Lancamento(l.id, l.dataLancamento, l.valor, l.usuario.id) from Lancamento l where l.usuario.id =  ").append(userId).append(" and l.dataLancamento = '")
-		.append(dataConsulta).append("' order by l.id desc");
+		.append(dataConsulta).append("'");
 		}else {
-			sql.append("select new model.Lancamento(l.id, l.dataLancamento, l.valor, l.usuario.id) from Lancamento l where l.usuario.id =  ").append(userId).append(" order by l.id desc");
+			sql.append("select new model.Lancamento(l.id, l.dataLancamento, l.valor, l.usuario.id) from Lancamento l where l.usuario.id =  ").append(userId).append("");
 		}
 		
 		List<Lancamento> lancamentos = new ArrayList<Lancamento>();

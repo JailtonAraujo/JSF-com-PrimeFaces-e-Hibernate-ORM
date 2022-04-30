@@ -85,7 +85,6 @@ public class pessoaBean implements Serializable{
 		}
 		return false;
 	}
-
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;

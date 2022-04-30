@@ -5,7 +5,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #483D8B;
+	background-color: darkcyan;
 	
 }
 
@@ -34,7 +34,7 @@ body {
 .ui-panel-titlebar	{
 	text-align: center;
 	background-color: darkcyan;
-	text-shadow: 2px 2px 4px #8080ff;
+	text-shadow: 2px 2px 4px darkcyan;
 	font-size: 15pt; 
 }
 

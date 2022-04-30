@@ -34,15 +34,19 @@ public class emailBean implements Serializable {
 
 	public void addEmail() {
 		email.setPessoa(usuario);
-		daoGeneric.persist(email);
-		GerarMSG("Email Cadastrado com sucesso!");
-		carregarEmails();
+		email = daoGeneric.salvarMerge(email);
+		if(email != null) {
+			emails.add(email);
+			GerarMSG("Email Cadastrado com sucesso!");
+		}else {
+			GerarMSG("Erro ao Cadastrar email!");
+		}
 		email = new Email();
 	}
 	
 	@PostConstruct
 	public void init() {
-		carregarEmails();
+		
 	}
 	
 	public void carregarEmails() {
@@ -52,7 +56,7 @@ public class emailBean implements Serializable {
 	public void deletar() {
 		if(daoGeneric.deletar(email.getId(), Email.class)) {
 			GerarMSG("Ecluido com sucesso");
-			carregarEmails();
+			emails.remove(email);
 		}	
 	}
 

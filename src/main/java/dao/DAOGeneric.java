@@ -22,10 +22,10 @@ public class DAOGeneric <E>{
 		}catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
-			return null;
 		}finally {
 			entityManager.close();
 		}
+		return null;
 	}
 	
 	public boolean deletar(Long id, Class<E> entidade) {
