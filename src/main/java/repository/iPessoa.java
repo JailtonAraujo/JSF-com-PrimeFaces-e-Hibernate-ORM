@@ -13,4 +13,6 @@ public interface iPessoa {
 	public List<Pessoa> buscarPaginator(int first, int pageSize, String nomeBusca);
 	
 	public Integer countPaginator(String nomeBusca);
+	
+	public boolean validarLogin(String login);
 }

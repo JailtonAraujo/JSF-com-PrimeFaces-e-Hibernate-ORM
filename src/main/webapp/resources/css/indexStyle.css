@@ -9,9 +9,12 @@ body {
 	
 }
 
-.panelMain{
+.ui-panel{
+	margin-bottom:20px;
+	width:600px;
 	margin-top: 20px;
 }
+
 
 .panelG{
 	width: 100%;
@@ -43,3 +46,5 @@ body {
 	font-size: 12pt;
 	margin-left: 284px;
 }
+
+	

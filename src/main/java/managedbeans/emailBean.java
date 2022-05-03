@@ -44,10 +44,6 @@ public class emailBean implements Serializable {
 		email = new Email();
 	}
 	
-	@PostConstruct
-	public void init() {
-		
-	}
 	
 	public void carregarEmails() {
 		emails = imail.listarEmails(usuario.getId());

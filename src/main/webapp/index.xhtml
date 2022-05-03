@@ -15,11 +15,11 @@
 	<h:body>
 	
 	<h:form>
-	<p:messages id="messages" showDetail="true" closable="true">
+	<p:messages id="messages" autoUpdate="true" closable="true">
         <p:autoUpdate />
     </p:messages>
 		
-		<p:panel id="basic" header="LOGIN" style="margin-bottom:20px; width:600px;" styleClass="panelMain">
+		<p:panel id="basic" header="LOGIN" styleClass="panelMain">
         	<h:panelGrid columns="1" styleClass="panelG">
         	<p:outputLabel value="LOGIN:" for="txtLogin"/>
         	<p:inputText value="#{loginBean.usuario.login}" id="txtLogin" styleClass="inputs" required="true" requiredMessage="Login Obrigatorio!"/>
@@ -28,7 +28,7 @@
         	<p:password value="#{loginBean.usuario.senha}" id="txtSenha" label="Senha:" styleClass="inputs" required="true" requiredMessage="Senha Obrigatorio!"/>
    			</h:panelGrid>
    			<p:commandButton action="#{loginBean.logar}" value="LOGAR" />
-   			<p:commandButton value="CADASTRE-SE" styleClass="btnCad"/>
+   			<p:commandButton value="CADASTRE-SE" styleClass="btnCad" action="cadvisitante.jsf" immediate="true"/>
     	
 		</p:panel>
 		

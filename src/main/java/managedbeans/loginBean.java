@@ -1,10 +1,11 @@
 package managedbeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,18 +15,18 @@ import repository.iPessoa;
 import repository.iPessoaImpl;
 
 @ManagedBean(name = "loginBean")
-@ViewScoped
+@SessionScoped
 public class loginBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Pessoa Usuario = new Pessoa();
+	private Pessoa usuarioLogado = new Pessoa();
 	
 	iPessoa iPessoa = new iPessoaImpl();
 	
 	public String logar() {
 		
-		Pessoa usuarioLogado = iPessoa.logar(Usuario);
+		usuarioLogado = iPessoa.logar(usuarioLogado);
 		
 		if(usuarioLogado != null && usuarioLogado.getId() != null) {
 			
@@ -40,15 +41,21 @@ public class loginBean implements Serializable{
 		return "index.jsf?faces-redirect=true";
 	}
 	
-	public String logout() {
+	public void logout() {
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("usuarioLogado");
 
 		HttpServletRequest request = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
 				.getRequest();
 		request.getSession().invalidate();
-
-		return "index.jsf";
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/index.jsf");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void GerarMSG(String msg) {
@@ -56,11 +63,11 @@ public class loginBean implements Serializable{
 	}
 
 	public Pessoa getUsuario() {
-		return Usuario;
+		return usuarioLogado;
 	}
 
 	public void setUsuario(Pessoa usuario) {
-		Usuario = usuario;
+		usuarioLogado = usuario;
 	}
 	
 	

@@ -1,24 +1,16 @@
 package managedbeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
-import javax.servlet.http.HttpServletRequest;
 
 import dao.DAOGeneric;
 import dataTableLazy.LazyDataTableModelPessoa;
-import model.Email;
 import model.Pessoa;
-import repository.iEmail;
-import repository.iEmailImpl;
 import repository.iPessoa;
 import repository.iPessoaImpl;
 
@@ -37,15 +29,20 @@ public class pessoaBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		listUsuarios.load(0, 5, null, null, null);
+		//listUsuarios.load(0, 5, null, null, null);
 		verificarUsuarioExist();
 		return;
 	}
 	
 	public String salvar() {
 		try {
-		pessoa = daoGeneric.salvarMerge(pessoa);
-		GerarMSG("Salvo com Sucesso!");
+		if(iPessoa.validarLogin(pessoa.getLogin())) {
+			pessoa = daoGeneric.salvarMerge(pessoa);
+			GerarMSG("Salvo com Sucesso!");
+		}else {
+			GerarMSG("Login Indisponivél!");
+		}
+		
 		}catch (Exception e) {
 			GerarMSG(e.getMessage());
 		}

@@ -30,7 +30,8 @@
  
  
         <f:facet name="options">
-            <p:commandButton type="button" value="Logout" icon="pi pi-home" immediate="true" id="btnSair">
+        <p:outputLabel value="Usuario: #{loginBean.usuario.nome}" style="margin-right:20px;"/>
+            <p:commandButton type="button" value="Logout" icon="pi pi-home" immediate="true" id="btnSair" >
             	<f:ajax event="click" execute="btnSair" render="@form" immediate="true" listener="#{loginBean.logout}"/>
             </p:commandButton>
         </f:facet>

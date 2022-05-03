@@ -45,8 +45,7 @@ public class filterMain implements Filter {
 		
 		else if((!url.equalsIgnoreCase("/index.jsf") && usuarioLogado == null)) {
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsf?faces-redirect=true");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("/index.jsf?faces-redirect=true").forward(request, response);
 			return;
 		}
 		

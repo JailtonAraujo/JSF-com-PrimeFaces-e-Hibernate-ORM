@@ -105,4 +105,24 @@ public class iPessoaImpl implements Serializable, iPessoa{
 		return Integer.parseInt(quant);
 	}
 
+	@Override
+	public boolean validarLogin(String login) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		Integer existe = Integer.parseInt(entityManager.createNativeQuery("select count(1) from pessoa where login = '"+login+"'").getSingleResult().toString());
+		
+		if(existe > 0){
+			transaction.commit();
+			entityManager.close();
+			return false;
+		}
+		
+		transaction.commit();
+		entityManager.close();
+		return true;
+	}
+
 }
